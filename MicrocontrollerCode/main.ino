@@ -3,7 +3,7 @@
 const int buttonPin = 2;
 
 SoftwareSerial bluetooth(10, 11); //RX, TX
-char input[] = " ";
+char input[] = "Test";
 int buttonState = 0;
 int timesNotified = 0;
 
@@ -32,6 +32,6 @@ void sendSignal() {
 }
 
 void sendReset() {
-    bluetooth.print(timesNotified);
+    bluetooth.print(input);
     bluetooth.print(";");
 }
