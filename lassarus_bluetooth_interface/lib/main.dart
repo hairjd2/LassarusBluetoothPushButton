@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const MyApp());
+
+// final firstName = SharedPreferences.getInstance();
+// final lastName = SharedPreferences.getInstance();
+String firstName = " ";
+String lastName = " ";
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,17 +32,11 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  // static const TextStyle optionStyle =
+  // TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Profile',
-      style: optionStyle,
-    ),
+    HomePage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -82,7 +83,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    FlutterBlue flutterBlue = FlutterBlue.instance;
+    // Start scanning
+    flutterBlue.startScan(timeout: const Duration(seconds: 4));
+
+    // Listen to scan results
+    var subscription = flutterBlue.scanResults.listen((results) {
+      // do something with scan results
+      for (ScanResult r in results) {
+        print('${r.device.name} found! rssi: ${r.rssi}');
+      }
+    });
+
+    // Stop scanning
+    flutterBlue.stopScan();
+    return Text('Welcome $firstName $lastName');
   }
 }
 
@@ -94,8 +109,63 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final List<Widget> widgets = <Widget>[
+      TextFormField(
+        controller: firstNameController,
+        decoration: const InputDecoration(
+          border: UnderlineInputBorder(),
+          labelText: 'First Name',
+        ),
+      ),
+      TextFormField(
+        controller: lastNameController,
+        decoration: const InputDecoration(
+          border: UnderlineInputBorder(),
+          labelText: 'Last Name',
+        ),
+      ),
+      TextButton(
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.blue,
+        ),
+        onPressed: () {
+          firstName = firstNameController.text;
+          lastName = lastNameController.text;
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text(firstNameController.text),
+                );
+              });
+        },
+        child: const Text('Save'),
+      )
+    ];
+    return Scaffold(
+        body: Center(
+      child: ListView.separated(
+        padding: const EdgeInsets.all(25),
+        itemCount: 3,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            child: widgets[index],
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
+      ),
+    ));
   }
 }
