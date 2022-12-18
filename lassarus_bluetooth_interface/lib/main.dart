@@ -34,9 +34,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   // static const TextStyle optionStyle =
   // TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    ProfilePage(),
+    const ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -66,7 +66,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue[800],
         onTap: _onItemTapped,
       ),
     );
@@ -74,7 +74,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  FlutterBlue flutterBlue = FlutterBlue.instance;
+  final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -83,21 +85,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    FlutterBlue flutterBlue = FlutterBlue.instance;
+    // widget.flutterBlue.connectedDevices.asStream()
+    // .listen((List<BluetoothDevice> devices)) {
+    //   for(BluetoothDevice device in devices) {
+    //     _addDeviceTolist(device);
+    //   }
+    // };
+
     // Start scanning
-    flutterBlue.startScan(timeout: const Duration(seconds: 4));
+    // flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // Listen to scan results
-    var subscription = flutterBlue.scanResults.listen((results) {
-      // do something with scan results
-      for (ScanResult r in results) {
-        print('${r.device.name} found! rssi: ${r.rssi}');
-      }
-    });
 
     // Stop scanning
-    flutterBlue.stopScan();
-    return Text('Welcome $firstName $lastName');
+    // flutterBlue.stopScan();
+
+    final List<String> entries = <String>['A', 'B', 'C'];
+    final List<int> colorCodes = <int>[600, 500, 100];
+    return ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: widget.devicesList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            height: 50,
+            color: Colors.amber[index],
+            child:
+                Center(child: Text('Found $widget.devicesList.length devices')),
+          );
+        });
   }
 }
 
