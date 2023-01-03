@@ -1,6 +1,9 @@
+import "dart:async";
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const MyApp());
 
@@ -76,7 +79,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 class HomePage extends StatefulWidget {
   HomePage({super.key});
   FlutterBlue flutterBlue = FlutterBlue.instance;
-  final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -85,32 +87,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // widget.flutterBlue.connectedDevices.asStream()
-    // .listen((List<BluetoothDevice> devices)) {
-    //   for(BluetoothDevice device in devices) {
-    //     _addDeviceTolist(device);
-    //   }
-    // };
-
-    // Start scanning
-    // flutterBlue.startScan(timeout: const Duration(seconds: 4));
-
-    // Listen to scan results
-
-    // Stop scanning
-    // flutterBlue.stopScan();
-
     final List<String> entries = <String>['A', 'B', 'C'];
     final List<int> colorCodes = <int>[600, 500, 100];
     return ListView.builder(
         padding: const EdgeInsets.all(8),
-        itemCount: widget.devicesList.length,
+        itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
             height: 50,
             color: Colors.amber[index],
-            child:
-                Center(child: Text('Found $widget.devicesList.length devices')),
+            child: Center(child: Text("Entry $entries[index]")),
           );
         });
   }
