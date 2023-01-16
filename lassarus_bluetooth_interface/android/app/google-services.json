@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "222853214162",
+    "firebase_url": "https://fir-test-edb81-default-rtdb.firebaseio.com",
+    "project_id": "fir-test-edb81",
+    "storage_bucket": "fir-test-edb81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222853214162:android:a523a0970f4cf8b7a4620b",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.FirebaseTest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222853214162-o21ctgo2v7jk96d7k6euh76nav74molj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMJp15UHlLzMsMvNNw0NnZrMYEccL1J9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222853214162-o21ctgo2v7jk96d7k6euh76nav74molj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "222853214162-ubbut5lrd9cqosbp1giijmvnomsnfuop.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.FirebaseTest"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222853214162:android:414f74a0676c4242a4620b",
+        "android_client_info": {
+          "package_name": "com.example.lassarus_bluetooth_interface"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222853214162-o21ctgo2v7jk96d7k6euh76nav74molj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMJp15UHlLzMsMvNNw0NnZrMYEccL1J9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222853214162-o21ctgo2v7jk96d7k6euh76nav74molj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "222853214162-ubbut5lrd9cqosbp1giijmvnomsnfuop.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.FirebaseTest"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

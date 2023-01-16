@@ -1,11 +1,22 @@
 import "dart:async";
 import 'dart:math';
 
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // sendData();
+  // FirebaseDatabase database = FirebaseDatabase.instance;
+  runApp(const MyApp());
+}
 
 // final firstName = SharedPreferences.getInstance();
 // final lastName = SharedPreferences.getInstance();
@@ -169,4 +180,16 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     ));
   }
+}
+
+Future<void> sendData() async {
+  DatabaseReference ref = FirebaseDatabase.instance.ref("IncomingData");
+
+  await ref.set({
+    "data1": {
+      "name": "John",
+      "age": 18,
+      // "address": {"line1": "100 Mountain View"}
+    }
+  });
 }
